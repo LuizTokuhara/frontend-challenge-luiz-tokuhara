@@ -1,0 +1,23 @@
+<form class="login-container" [formGroup]="loginForm">
+  <ion-input
+    id="email-input"
+    [formControlName]="'email'"
+    type="email"
+    class="login-container__input"
+    placeholder="E-mail"
+  ></ion-input>
+
+  <ion-input
+    id="password-input"
+    [formControlName]="'password'"
+    type="password"
+    class="login-container__input"
+    placeholder="Password"
+  ></ion-input>
+
+  <app-button
+    id="login-button"
+    [disabled]="!loginForm.valid"
+    (click)="doLogin()"
+  ></app-button>
+</form>

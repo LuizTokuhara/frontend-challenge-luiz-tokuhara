@@ -1,0 +1,27 @@
+.login-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90%;
+  background: var(--ion-color-light);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  &__input {
+    height: 50px;
+    border: 2px solid var(--ion-color-secondary);
+    border-radius: 100px;
+    padding: 10px 20px;
+    color: var(--ion-color-dark);
+    --padding-start: 15px;
+    --padding-end: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+}
