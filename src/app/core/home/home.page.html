@@ -3,7 +3,9 @@
     <ion-title>Holidays</ion-title>
   </ion-toolbar>
   <ion-toolbar color="secondary">
-    <div class="country-selector" *ngIf="selectedCountry">
+    <div class="country-selector"
+      *ngIf="selectedCountry"
+      (click)="countriesModal()">
       {{selectedCountry.name}}
       <ion-icon class="country-selector__icon" name="filter-circle-outline"></ion-icon>
     </div>
@@ -11,7 +13,5 @@
 </ion-header>
 
 <ion-content>
-  <app-holiday-card></app-holiday-card>
-  <app-holiday-card></app-holiday-card>
-
+  <app-holiday-card [holidays]="holidays"></app-holiday-card>
 </ion-content>

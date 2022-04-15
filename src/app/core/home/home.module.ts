@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { HolidayCardComponent } from 'src/app/components/holiday-card/holiday-card.component';
+import { CountryModalComponent } from 'src/app/components/country-modal/country-modal.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HolidayCardComponent } from 'src/app/components/holiday-card/holiday-ca
   ],
   declarations: [
     HomePage,
-    HolidayCardComponent
+    HolidayCardComponent,
+    CountryModalComponent
   ]
 })
 export class HomePageModule {}

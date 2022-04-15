@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
+import { CountryModalComponent } from 'src/app/components/country-modal/country-modal.component';
 import { CountriesList, Country } from 'src/app/models/countries.interface';
+import { Holidays } from 'src/app/models/holidays.interface';
 import { HomeService } from './use-cases/home.service';
 
 @Component({
@@ -13,8 +16,12 @@ export class HomePage {
 
   public countries: CountriesList;
   public selectedCountry: Country;
+  public holidays: Holidays[];
 
-  constructor(private homeService: HomeService) {}
+  constructor(
+    private homeService: HomeService,
+    private modalCtrl: ModalController
+    ) {}
 
   ionViewDidEnter() {
     this.getCountries();
@@ -29,8 +36,37 @@ export class HomePage {
     ).subscribe(res => {
       this.countries = res;
       this.selectedCountry = res.countries[0];
-      console.log(this.selectedCountry)
+      this.getHolidays(this.selectedCountry.code);
     });
+  }
+
+  getHolidays(country) {
+    this.homeService.getHolidays(country).pipe(
+      take(1),
+      catchError((err) => {
+        return throwError(err);
+      })
+    )
+    .subscribe(res => {
+      this.holidays = res.holidays;
+    })
+  }
+
+  async countriesModal() {
+    const modal = await this.modalCtrl.create({
+      component: CountryModalComponent,
+      componentProps: {
+        data: this.countries.countries
+      }
+    });
+
+    modal.onDidDismiss().then((country) => {
+      if(country.data) {
+        this.selectedCountry = country.data;
+        this.getHolidays(this.selectedCountry.code);
+      }
+    });
+    return await modal.present();
   }
 
 }

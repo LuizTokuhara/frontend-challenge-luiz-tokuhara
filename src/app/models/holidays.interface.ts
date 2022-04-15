@@ -2,7 +2,7 @@ export interface HolidaysList {
   holidays: Holidays[];
 }
 
-interface Holidays {
+export interface Holidays {
   date: string;
   name: string;
   local_name: string;
