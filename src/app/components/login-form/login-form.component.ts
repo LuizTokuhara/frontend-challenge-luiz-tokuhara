@@ -23,6 +23,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   doLogin() {
-    this.isLoginOk.emit(true);
+    if(this.loginForm.valid) {
+      this.isLoginOk.emit(true);
+    }
   }
 }

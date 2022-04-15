@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ButtonComponent } from '../button/button.component';
 
@@ -75,6 +75,11 @@ describe('LoginFormComponent', () => {
   });
 
   it('should emit true to login', () => {
+    const data = {
+      email: 'email@gmail.com',
+      password: '123456'
+    }
+    component.loginForm.setValue(data);
     component.doLogin();
     component.isLoginOk.subscribe(resp => {
       expect(resp).toBe(true);

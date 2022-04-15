@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
 
   doLogin(ev) {
     if (ev) {
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('home', { replaceUrl: true });
     }
   }
 

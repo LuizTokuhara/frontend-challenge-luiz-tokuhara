@@ -47,7 +47,7 @@ describe('LoginPage', () => {
     };
     (document.getElementById('email-input') as HTMLInputElement).value = data.email;
     (document.getElementById('password-input') as HTMLInputElement).value = data.password;
-    button.click();
-    expect(router.navigateByUrl).toBeCalledWith('home');
+    component.doLogin(true);
+    expect(router.navigateByUrl).toBeCalledWith('home', { replaceUrl: true });
   });
 });

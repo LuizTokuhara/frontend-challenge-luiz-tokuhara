@@ -10,11 +10,14 @@ import { HomePage } from './home.page';
 import { HomeService } from './use-cases/home.service';
 import { HolidaysListMock } from '../../mocks/holidays.mock';
 import { AlertService } from '../../services/alert/alert.service';
+import { LoadingService } from '../../services/loading/loading.service';
 
 
 describe('HomePage', () => {
   let component: HomePage;
   let fixture: ComponentFixture<HomePage>;
+  let loadingShow;
+  let loadingHide;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -31,8 +34,12 @@ describe('HomePage', () => {
         HomeService,
         ModalController,
         AlertService,
+        LoadingService,
       ]
     }).compileComponents();
+
+    loadingShow = jest.spyOn(LoadingService.prototype, 'show');
+    loadingHide = jest.spyOn(LoadingService.prototype, 'hide');
 
     fixture = TestBed.createComponent(HomePage);
     component = fixture.componentInstance;
@@ -53,6 +60,8 @@ describe('HomePage', () => {
       .mockReturnValue(of(HolidaysListMock));
 
     component.ionViewDidEnter();
+    expect(loadingShow).toBeCalled();
+    expect(loadingHide).toBeCalled();
     expect(fetchCountries).toBeCalled();
     expect(fetchHolidays).toBeCalled();
     expect(component.countries).toEqual(CountriesListMock);
@@ -95,6 +104,8 @@ describe('HomePage', () => {
       .mockResolvedValue();
 
     component.ionViewDidEnter();
+    expect(loadingShow).toBeCalled();
+    expect(loadingHide).toBeCalled();
     expect(alert).toBeCalledWith('Ops', 'Something went wrong, try again later');
   });
 
@@ -113,7 +124,8 @@ describe('HomePage', () => {
 
     component.countries = CountriesListMock;
     component.ionViewDidEnter();
-
+    expect(loadingShow).toBeCalled();
+    expect(loadingHide).toBeCalled();
     expect(alert).toBeCalledWith('Ops', 'Something went wrong, try again later');
   });
 });

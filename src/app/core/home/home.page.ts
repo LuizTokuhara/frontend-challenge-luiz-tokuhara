@@ -7,6 +7,7 @@ import { CountryModalComponent } from '../../components/country-modal/country-mo
 import { CountriesList, Country } from '../../models/countries.interface';
 import { Holidays } from '../../models/holidays.interface';
 import { HomeService } from './use-cases/home.service';
+import { LoadingService } from '../../services/loading/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -22,10 +23,12 @@ export class HomePage {
   constructor(
     private homeService: HomeService,
     private modalCtrl: ModalController,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private loadingService: LoadingService
     ) {}
 
   ionViewDidEnter() {
+    this.loadingService.show();
     this.getCountries();
   }
 
@@ -39,7 +42,9 @@ export class HomePage {
       this.countries = res;
       this.selectedCountry = res.countries[0];
       this.getHolidays(this.selectedCountry.code);
+      this.loadingService.hide();
     }, () => {
+      this.loadingService.hide();
       this.alertService.errorAlert('Ops', 'Something went wrong, try again later');
     });
   }
@@ -53,7 +58,9 @@ export class HomePage {
     )
     .subscribe(res => {
       this.holidays = res.holidays;
+      this.loadingService.hide();
     }, () => {
+      this.loadingService.hide();
       this.alertService.errorAlert('Ops', 'Something went wrong, try again later');
     })
   }
@@ -68,6 +75,7 @@ export class HomePage {
 
     modal.onDidDismiss().then((country) => {
       if(country.data) {
+        this.loadingService.show();
         this.selectedCountry = country.data;
         this.getHolidays(this.selectedCountry.code);
       }
