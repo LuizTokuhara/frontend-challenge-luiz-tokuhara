@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: {
+    baseUrl: 'https://api.m3o.com/v1/holidays/',
+    countries: 'Countries',
+    holidays: 'List',
+    token: 'NDRkZGY2MjktZWNiNy00MThlLWEyZmUtM2ExYzk3OTFkOTEx'
+  }
 };
 
 /*

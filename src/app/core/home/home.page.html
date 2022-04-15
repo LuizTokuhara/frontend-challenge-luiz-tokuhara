@@ -3,8 +3,8 @@
     <ion-title>Holidays</ion-title>
   </ion-toolbar>
   <ion-toolbar color="secondary">
-    <div class="country-selector">
-      Nome do país
+    <div class="country-selector" *ngIf="selectedCountry">
+      {{selectedCountry.name}}
       <ion-icon class="country-selector__icon" name="filter-circle-outline"></ion-icon>
     </div>
   </ion-toolbar>
