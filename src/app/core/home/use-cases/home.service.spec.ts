@@ -5,9 +5,11 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { HomeService } from './home.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CountriesListMock } from '../../../mocks/countries.mock';
 import { HolidaysListMock } from '../../../mocks/holidays.mock';
+import { CountriesList } from '../../../models/countries.interface';
+import { HolidaysList } from '../../../models/holidays.interface';
 
 describe('HomeService', () => {
   
@@ -16,7 +18,7 @@ describe('HomeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HomeService]
+      providers: [HomeService, HttpClient]
     });
     service = TestBed.inject(HomeService);
   });
@@ -25,23 +27,41 @@ describe('HomeService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should retrieve countries', () => {
-    const countries = jest
-      .spyOn(service, 'getCountries')
-      .mockReturnValue(of(CountriesListMock));
-    service.getCountries().subscribe(res => {
-      expect(countries).toBeCalled();
-      expect(res).toEqual(CountriesListMock);
-    })
+  it('should retrieve countries', (done) => {
+    jest
+      .spyOn(HttpClient.prototype, 'get')
+      .mockImplementation(
+        () =>
+          new Observable<CountriesList>((observer) => observer.next(CountriesListMock))
+      );
+
+    service.getCountries()
+      .subscribe((res) => {
+        expect(res).toEqual(CountriesListMock);
+        done();
+      },
+        () => {
+          done.fail('it should not fail');
+        }
+      )
   });
 
-  it('should retrieve holidays', () => {
-    const holidays = jest
-      .spyOn(service, 'getHolidays')
-      .mockReturnValue(of(HolidaysListMock));
-    service.getHolidays('GB').subscribe(res => {
-      expect(holidays).toBeCalled();
-      expect(res).toEqual(HolidaysListMock);
-    })
+  it('should retrieve holidays', (done) => {
+    jest
+      .spyOn(HttpClient.prototype, 'get')
+      .mockImplementation(
+        () =>
+          new Observable<HolidaysList>((observer) => observer.next(HolidaysListMock))
+      );
+
+    service.getHolidays('GB')
+      .subscribe((res) => {
+        expect(res).toEqual(HolidaysListMock);
+        done();
+      },
+        () => {
+          done.fail('it should not fail');
+        }
+      );
   });
 });

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
+import { AlertService } from '../../services/alert/alert.service';
 import { CountryModalComponent } from '../../components/country-modal/country-modal.component';
 import { CountriesList, Country } from '../../models/countries.interface';
 import { Holidays } from '../../models/holidays.interface';
@@ -20,7 +21,8 @@ export class HomePage {
 
   constructor(
     private homeService: HomeService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private alertService: AlertService
     ) {}
 
   ionViewDidEnter() {
@@ -37,6 +39,8 @@ export class HomePage {
       this.countries = res;
       this.selectedCountry = res.countries[0];
       this.getHolidays(this.selectedCountry.code);
+    }, () => {
+      this.alertService.errorAlert('Ops', 'Something went wrong, try again later');
     });
   }
 
@@ -49,6 +53,8 @@ export class HomePage {
     )
     .subscribe(res => {
       this.holidays = res.holidays;
+    }, () => {
+      this.alertService.errorAlert('Ops', 'Something went wrong, try again later');
     })
   }
 
