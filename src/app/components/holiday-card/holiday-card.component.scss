@@ -1,0 +1,31 @@
+.holiday-container {
+  display: flex;
+  width: 90%;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  background: var(--ion-color-light);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+  margin: 0 auto 15px auto;
+
+  &__icon {
+    font-size: 40px;
+    color: var(--ion-color-secondary);
+    margin-right: 10px;
+  }
+
+  &__info {
+    h2 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+      color: var(--ion-color-dark);
+    }
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      margin: 0;
+      color: var(--ion-color-dark);
+    }
+  }
+}
