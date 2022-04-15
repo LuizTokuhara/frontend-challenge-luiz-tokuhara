@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { throwError } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
-import { CountryModalComponent } from 'src/app/components/country-modal/country-modal.component';
-import { CountriesList, Country } from 'src/app/models/countries.interface';
-import { Holidays } from 'src/app/models/holidays.interface';
+import { CountryModalComponent } from '../../components/country-modal/country-modal.component';
+import { CountriesList, Country } from '../../models/countries.interface';
+import { Holidays } from '../../models/holidays.interface';
 import { HomeService } from './use-cases/home.service';
 
 @Component({

@@ -4,7 +4,7 @@
     *ngFor="let holiday of holidays">
     <ion-icon class="holiday-container__icon" name="calendar-outline"></ion-icon>
     <div class="holiday-container__info">
-      <h2>{{holiday.date}}</h2>
+      <h2>{{holiday.date | date:'longDate'}}</h2>
       <p>{{holiday.name}}</p>
     </div>
   </div>
