@@ -5,6 +5,9 @@
     type="email"
     class="login-container__input"
     placeholder="E-mail"
+    [ngClass]="{
+      'login-container__error': !loginForm.get('email').valid && loginForm.get('email').touched
+    }"
   ></ion-input>
 
   <ion-input
@@ -13,6 +16,9 @@
     type="password"
     class="login-container__input"
     placeholder="Password"
+    [ngClass]="{
+      'login-container__error': !loginForm.get('password').valid && loginForm.get('password').touched
+    }"
   ></ion-input>
 
   <app-button

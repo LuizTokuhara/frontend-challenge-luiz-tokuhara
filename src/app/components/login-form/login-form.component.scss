@@ -24,4 +24,12 @@
     font-weight: 700;
     margin-bottom: 20px;
   }
+
+  &__error {
+    border: 2px solid var(--ion-color-danger);
+  }
+
+  &__span {
+    color: var(--ion-color-danger);
+  }
 }
