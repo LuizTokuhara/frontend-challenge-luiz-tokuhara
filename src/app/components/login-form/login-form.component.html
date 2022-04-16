@@ -1,4 +1,10 @@
 <form class="login-container" [formGroup]="loginForm">
+  <span
+    class="login-container__login-error"
+    *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched"
+    >
+    * You must enter a valid e-mail.
+  </span>
   <ion-input
     id="email-input"
     [formControlName]="'email'"
@@ -9,7 +15,12 @@
       'login-container__error': !loginForm.get('email').valid && loginForm.get('email').touched
     }"
   ></ion-input>
-
+  <span
+    class="login-container__login-error"
+    *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched"
+    >
+    * Your password must have at least 6 characters.
+  </span>
   <ion-input
     id="password-input"
     [formControlName]="'password'"

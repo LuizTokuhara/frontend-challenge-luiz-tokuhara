@@ -32,4 +32,12 @@
   &__span {
     color: var(--ion-color-danger);
   }
+
+  &__login-error {
+    display: inline-block;
+    padding: 0 0 10px 0;
+    color: var(--ion-color-danger);
+    font-weight: 700;
+    font-size: 12px;
+  }
 }
